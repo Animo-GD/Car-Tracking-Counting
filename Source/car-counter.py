@@ -19,7 +19,7 @@ classes = ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train',
 # Tracking
 tracker = Sort(max_age=20, min_hits=2)
 # Limits For The Counter Line
-limits = [400,700,1300,550]
+limits = [640,970,1700,610]
 # Car Id To Count The Cars
 car_ids = []
 # Counter Image
@@ -89,9 +89,9 @@ while cap.isOpened():
         cv2.circle(frame, (cx, cy), 6, (0, 0, 255), -1)
 
         # If The Center Cross The Line We Will Count 1
-        if (limits[0] < cx < limits[2]) and (limits[3] < cy < limits[1]):
-            car_ids.append(ID)
-            car_ids = list(set(car_ids))
+           if (limits[0] < cx < limits[2]) and (limits[3]-30 < cy < limits[1]+30) and car_ids.count(ID)==0:
+                      car_ids.append(ID)
+                      cv2.line(frame, (limits[0], limits[1]), (limits[2], limits[3]), (0, 255, 0), 4)
 
     out.write(frame)
     cv2.imshow("cam", frame)
